@@ -1,19 +1,16 @@
-
-FROM node:18-alpine
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files first
 COPY package*.json ./
 
-# Install dependencies
 RUN npm install
 
-# Copy project files
+# install evershop CLI
+RUN npm install -g @evershop/evershop
+
 COPY . .
 
-# Build EverShop
-RUN npm run setup
 RUN npm run build
 
 EXPOSE 3000
